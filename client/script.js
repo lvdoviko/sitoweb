@@ -74,13 +74,38 @@ const handleSubmit = async (e) =>
 
     const userMessage = data.get('prompt')
 
-    // Check if "viaggio" or "vacanza" are present in the user's message
+     // Verifica se nella frase inserita dall'utente non è presente la parola "viaggio" o la parola "vacanza"
     if (!userMessage.includes("viaggio") && !userMessage.includes("vacanza")) 
     {
-        // Return the desired response if "viaggio" or "vacanza" are not present
-        const uniqueId = generateUniqueId()
-        chatContainer.innerHTML += chatStripe(true, "Non so rispondere a questa domanda", uniqueId)
-        return
+        // Se non è presente, mostra il messaggio "Non so rispondere a questa domanda" con la stessa animazione degli altri messaggi del bot
+
+        // Aggiungi la chatstripe dell'utente
+        chatContainer.innerHTML += chatStripe(false, userMessage);
+
+        // Svuota la textarea
+        form.reset();
+
+        // Aggiungi la chatstripe del bot
+        const uniqueId = generateUniqueId();
+        chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
+
+        // Porta lo scroll in fondo alla chat
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        // Prendi il div del messaggio del bot
+        const messageDiv = document.getElementById(uniqueId);
+
+        // Mostra il messaggio di caricamento
+        loader(messageDiv);
+
+        // Attendi che il messaggio "Non so rispondere a questa domanda" sia scritto con l'effetto di battitura
+        setTimeout(() => {
+        clearInterval(loadInterval);
+        messageDiv.innerHTML = "";
+        typeText(messageDiv, "Non so rispondere a questa domanda");
+        }, 1000);
+
+        return;
     }
 
     // user's chatstripe
