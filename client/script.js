@@ -102,7 +102,7 @@ const handleSubmit = async (e) =>
         setTimeout(() => {
         clearInterval(loadInterval);
         messageDiv.innerHTML = "";
-        typeText(messageDiv, "Non so rispondere a questa domanda");
+        typeText(messageDiv, "Mi è consentito rispondere solo a domande inerenti a vacanze o viaggi");
         }, 1000);
 
         return;
