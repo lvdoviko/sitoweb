@@ -66,6 +66,30 @@ function chatStripe(isAi, value, uniqueId)
     )
 }
 
+async function checkForTravel(input) 
+{
+    const API_URL = `https://api.openai.com/v1/engines/davinci/jobs`;
+  
+    const response = await fetch(API_URL, 
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`
+      },
+      body: JSON.stringify({
+        prompt: `Is the following text about travel? ${input}`,
+        max_tokens: 128,
+        temperature: 0.7
+      })
+    });
+  
+    const json = await response.json();
+    const generatedText = json.choices[0].text;
+    return generatedText;
+  }
+  
+
 const handleSubmit = async (e) => 
 {
     e.preventDefault()
@@ -74,8 +98,10 @@ const handleSubmit = async (e) =>
 
     const userMessage = data.get('prompt')
 
+    const generatedText = await generateTextWithGPT3(userMessage);
+
      // Verifica se nella frase inserita dall'utente non è presente la parola "viaggio" o la parola "vacanza"
-    if (!userMessage.includes("viaggio") && !userMessage.includes("vacanza")) 
+    if (generatedText.includes("Yes")) 
     {
         // Se non è presente, mostra il messaggio "Non so rispondere a questa domanda" con la stessa animazione degli altri messaggi del bot
 
