@@ -6,7 +6,8 @@ const chatContainer = document.querySelector('#chat_container')
 
 let loadInterval
 
-function loader(element) {
+function loader(element) 
+{
     element.textContent = ''
 
     loadInterval = setInterval(() => {
@@ -20,7 +21,8 @@ function loader(element) {
     }, 300);
 }
 
-function typeText(element, text) {
+function typeText(element, text) 
+{
     let index = 0
 
     let interval = setInterval(() => {
@@ -36,7 +38,8 @@ function typeText(element, text) {
 // generate unique ID for each message div of bot
 // necessary for typing text effect for that specific reply
 // without unique ID, typing text will work on every element
-function generateUniqueId() {
+function generateUniqueId() 
+{
     const timestamp = Date.now();
     const randomNumber = Math.random();
     const hexadecimalString = randomNumber.toString(16);
@@ -44,7 +47,8 @@ function generateUniqueId() {
     return `id-${timestamp}-${hexadecimalString}`;
 }
 
-function chatStripe(isAi, value, uniqueId) {
+function chatStripe(isAi, value, uniqueId) 
+{
     return (
         `
         <div class="wrapper ${isAi && 'ai'}">
@@ -62,13 +66,25 @@ function chatStripe(isAi, value, uniqueId) {
     )
 }
 
-const handleSubmit = async (e) => {
+const handleSubmit = async (e) => 
+{
     e.preventDefault()
 
     const data = new FormData(form)
 
+    const userMessage = data.get('prompt')
+
+    // Check if "viaggio" or "vacanza" are present in the user's message
+    if (!userMessage.includes("viaggio") && !userMessage.includes("vacanza")) 
+    {
+        // Return the desired response if "viaggio" or "vacanza" are not present
+        const uniqueId = generateUniqueId()
+        chatContainer.innerHTML += chatStripe(true, "Non so rispondere a questa domanda", uniqueId)
+        return
+    }
+
     // user's chatstripe
-    chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
+    chatContainer.innerHTML += chatStripe(false, userMessage)
 
     // to clear the textarea input 
     form.reset()
@@ -86,9 +102,11 @@ const handleSubmit = async (e) => {
     // messageDiv.innerHTML = "..."
     loader(messageDiv)
 
-    const response = await fetch('https://mipeverytime.onrender.com', {
+    const response = await fetch('https://mipeverytime.onrender.com', 
+    {
         method: 'POST',
-        headers: {
+        headers: 
+        {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -99,24 +117,28 @@ const handleSubmit = async (e) => {
     clearInterval(loadInterval)
     messageDiv.innerHTML = " "
 
-    if (response.ok) {
+    if (response.ok) 
+    {
         const data = await response.json();
         const parsedData = data.bot.trim() // trims any trailing spaces/'\n'
         
         console.log({parsedData})
 
         typeText(messageDiv, parsedData)
-    } else {
+    } else 
+    {
         const err = await response.text()
 
-        messageDiv.innerHTML = "Something went wrong"
+        messageDiv.innerHTML = "Qualcosa è andato storto"
         alert(err)
     }
 }
 
 form.addEventListener('submit', handleSubmit)
-form.addEventListener('keyup', (e) => {
-    if (e.keyCode === 13) {
+form.addEventListener('keyup', (e) => 
+{
+    if (e.keyCode === 13) 
+    {
         handleSubmit(e)
     }
 })
