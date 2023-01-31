@@ -154,7 +154,11 @@ const handleSubmit = async (e) =>
     {
         const err = await response.text()
 
-        messageDiv.innerHTML = "Qualcosa è andato storto"
+        setTimeout(() => {
+            clearInterval(loadInterval);
+            messageDiv.innerHTML = "";
+            typeText(messageDiv, "Qualcosa è andato storto");
+            }, 1000);
         alert(err)
     }
 }
