@@ -103,7 +103,7 @@ const handleSubmit = async (e) =>
         setTimeout(() => {
         clearInterval(loadInterval);
         messageDiv.innerHTML = "";
-        typeText(messageDiv, "Mi è consentito rispondere solo a domande inerenti a vacanze o viaggi");
+        typeText(messageDiv, "Mi è consentito rispondere solo a domande inerenti a vacanze o viaggi.");
         }, 1000);
 
         return;
@@ -158,7 +158,7 @@ const handleSubmit = async (e) =>
         setTimeout(() => {
             clearInterval(loadInterval);
             messageDiv.innerHTML = "";
-            typeText(messageDiv, "Qualcosa è andato storto");
+            typeText(messageDiv, "Il server non risponde. Ricaricare la pagina.");
             }, 1000);
         alert(err)
     }

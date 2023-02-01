@@ -6,22 +6,32 @@
   font-family: 'Cutive Mono', monospace;
 }
 
-body {
-  background: #343541;
+body 
+{
+  background: #ffffff;
 }
 
+
 #app {
-  width: 100vw;
-  height: 100vh;
+  width: 30vw; 
+  height: 50vh;
   background: #343541;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  align-items: center; 
+  justify-content: flex-end;
+  margin: auto; 
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-#chat_container {
+
+
+#chat_container 
+{
   flex: 1;
   width: 100%;
   height: 100%;
@@ -111,7 +121,9 @@ body {
   display: none;
 }
 
-form {
+
+form 
+{
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
@@ -123,7 +135,9 @@ form {
   gap: 10px;
 }
 
-textarea {
+
+textarea 
+{
   width: 100%;
 
   color: #fff;
@@ -136,7 +150,8 @@ textarea {
   outline: none;
 }
 
-button {
+button 
+{
   outline: 0;
   border: 0;
   cursor: pointer;
