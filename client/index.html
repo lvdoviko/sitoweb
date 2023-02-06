@@ -5,12 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>triptrove</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <script src="script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
   </head>
-  <body>
+  <body onload="initMap()">
     <svg width='600' height='200'>
       <filter id='money'>
         <feMorphology in='SourceGraphic' operator='dilate' radius='2' result='expand' />
@@ -78,11 +80,9 @@
           <feMergeNode in='SourceGraphic' />
         </feMerge>
       </filter>
-    
-      <text dominant-baseline='middle' text-anchor='middle' x='50%' y='50%'>
-        TripTrove
-      </text>
+      <text dominant-baseline='middle' text-anchor='middle' x='50%' y='50%'>TripTrove</text>
     </svg>
+    <input class="searchInput" type="text" placeholder="Cerca luogo">
     <div id="app">
       <div id="chat_container"></div>
       <form>

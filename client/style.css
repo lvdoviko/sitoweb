@@ -169,6 +169,7 @@ text
   font-family: 'Playfair Display', 'Georgia', serif;
   font-size: 84px;
   font-weight: 630;
+  text-align: center;
 }
 
 html 
@@ -179,4 +180,26 @@ html
   justify-content: center;
   min-height: 100vh;
   min-width: 600px;
+  text-align: center;
+}
+
+.searchInput 
+{
+  width: 500px;
+  height: 40px;
+  font-size: 18px;
+  padding: 10px;
+  border: 2px solid gray;
+  border-radius: 5px;
+  text-align: center;
+  margin: 20px auto;
+  transition: all 0.5s;
+}
+
+.searchInput:focus 
+{
+  width: 550px;
+  height: 45px;
+  border-color: gray;
+  text-align: center;
 }
