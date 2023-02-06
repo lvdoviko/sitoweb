@@ -173,57 +173,5 @@ form.addEventListener('keyup', (e) =>
     }
 })
 
-var map;
-var marker;
-var infowindow;
 var searchInput = document.getElementById("searchInput");
-
-function initMap() 
-{
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 41.8719, lng: 12.5674 },
-    zoom: 8,
-  });
-  
-  var autocomplete = new google.maps.places.Autocomplete(searchInput);
-  autocomplete.bindTo("bounds", map);
-
-  marker = new google.maps.Marker({
-    map: map,
-  });
-
-  infowindow = new google.maps.InfoWindow();
-  
-  autocomplete.addListener("place_changed", function () 
-  {
-    infowindow.close();
-    marker.setVisible(false);
-    var place = autocomplete.getPlace();
-    if (!place.geometry) 
-    {
-      return;
-    }
-    if (place.geometry.viewport) 
-    {
-      map.fitBounds(place.geometry.viewport);
-    } 
-    else 
-    {
-      map.setCenter(place.geometry.location);
-      map.setZoom(17);
-    }
-    marker.setPosition(place.geometry.location);
-    marker.setVisible(true);
-    var address = "";
-    if (place.address_components) 
-    {
-      address = [
-        (place.address_components[0] && place.address_components[0].short_name) || "",
-        (place.address_components[1] && place.address_components[1].short_name) || "",
-        (place.address_components[2] && place.address_components[2].short_name) || "",
-      ].join(" ");
-    }
-    infowindow.setContent("<div><strong>" + place.name + "</strong><br>" + address + "</div>");
-    infowindow.open(map, marker);
-  });
-}
+var autocomplete = new google.maps.places.Autocomplete(searchInput);
