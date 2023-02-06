@@ -181,7 +181,8 @@ function initMap()
     var input = document.getElementById("searchInput");
     var autocomplete = new google.maps.places.Autocomplete(input);
 
-    input.addEventListener("input", function() {
+    input.addEventListener("input", function() 
+    {
       var predictions = autocomplete.getPlacePredictions();
       // Elencare le opzioni corrispondenti sotto la casella di input
     });
