@@ -174,27 +174,31 @@ text
 
 html 
 {
-  align-items: top;
-  background: #ebe7e0;
+  align-items: center;
   display: flex;
   justify-content: center;
   min-height: 100vh;
   min-width: 600px;
   text-align: center;
+  background: #ebe7e0;
 }
 
 .searchInput 
 {
-  width: 500px;
+  width: 400px;
   height: 40px;
   font-size: 18px;
   padding: 10px;
   border: 2px solid gray;
   border-radius: 5px;
   text-align: center;
-  margin: 20px auto;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   transition: all 0.5s;
 }
+
 
 .searchInput:focus 
 {
