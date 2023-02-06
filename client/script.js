@@ -176,7 +176,7 @@ form.addEventListener('keyup', (e) =>
 
 
 
-function App() {
+function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('')
   const [options, setOptions] = useState([])
   const [showOptions, setShowOptions] = useState(false)
@@ -203,7 +203,7 @@ function App() {
   }, [searchTerm])
 
   return (
-    <div className="App">
+    <div className="SearchBar">
       <input type="text" value={searchTerm} onChange={handleSearch} style={{ textAlign: 'center' }} />
       {showOptions && (
         <ul className="options">
@@ -216,4 +216,4 @@ function App() {
   )
 }
 
-export default App
+export default SearchBar
