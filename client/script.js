@@ -1,5 +1,6 @@
 import bot from './assets/bot.svg'
 import user from './assets/user.svg'
+import React, { useState, useEffect } from 'react'
 
 const form = document.querySelector('form')
 const chatContainer = document.querySelector('#chat_container')
@@ -173,17 +174,46 @@ form.addEventListener('keyup', (e) =>
     }
 })
 
-var input = document.getElementById("searchInput");
-var autocomplete = new google.maps.places.Autocomplete(input);
 
-function initMap() 
-{
-    var input = document.getElementById("searchInput");
-    var autocomplete = new google.maps.places.Autocomplete(input);
 
-    input.addEventListener("input", function() 
-    {
-      var predictions = autocomplete.getPlacePredictions();
-      // Elencare le opzioni corrispondenti sotto la casella di input
-    });
+function App() {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [options, setOptions] = useState([])
+  const [showOptions, setShowOptions] = useState(false)
+
+  const handleSearch = event => {
+    setSearchTerm(event.target.value)
+  }
+
+  useEffect(() => {
+    if (!searchTerm) {
+      setOptions([])
+      setShowOptions(false)
+      return
+    }
+
+    fetch(
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${searchTerm}&types=establishment&key=AIzaSyB-Aa2zaH2SW2gJeYxqdWRZGXzOWtez8_Q`
+    )
+      .then(response => response.json())
+      .then(data => {
+        setOptions(data.predictions.map(prediction => prediction.description))
+        setShowOptions(true)
+      })
+  }, [searchTerm])
+
+  return (
+    <div className="App">
+      <input type="text" value={searchTerm} onChange={handleSearch} style={{ textAlign: 'center' }} />
+      {showOptions && (
+        <ul className="options">
+          {options.map((option, index) => (
+            <li key={index}>{option}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
 }
+
+export default App
